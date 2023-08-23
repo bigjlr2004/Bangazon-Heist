@@ -18,6 +18,7 @@ namespace Heist
             string Name = Console.ReadLine();
             Dictionary<string, Robber> robbers = new Dictionary<string, Robber>();
             int BankDifficulty = 100;
+            int luckNumber = new Random().Next(-10, 10);
 
             while (Name != "")
             {
@@ -89,9 +90,12 @@ namespace Heist
 
 
             }
+            BankDifficulty += luckNumber;
             Console.WriteLine($"-----------Heist Members Skill Level: {TeamSkillLevel} ------------");
             Console.WriteLine();
             Console.WriteLine($"-----------Bank Difficulty Level: {BankDifficulty} ------------");
+            Console.WriteLine();
+            Console.WriteLine($"-----------Bank Luck Level: {luckNumber} ------------");
             if (TeamSkillLevel > BankDifficulty)
             {
                 Console.WriteLine("");
