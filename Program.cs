@@ -14,6 +14,17 @@ namespace Heist
             Console.WriteLine("---------------------");
             Console.WriteLine("Let's get started.");
             Console.WriteLine("---------------------");
+            Console.WriteLine("First things first.... How difficult is the bank gonna be to rob?");
+            string BankResult = Console.ReadLine();
+
+            int intGood;
+            int BankDifficulty = 0;
+            bool BankResultTryParse = int.TryParse(BankResult, out intGood);
+            if (BankResultTryParse)
+            {
+                BankDifficulty = intGood;
+            }
+            Console.WriteLine("---------------------");
             Console.WriteLine("What is your teammates name?");
             string Name = Console.ReadLine();
             Dictionary<string, Robber> robbers = new Dictionary<string, Robber>();
@@ -84,6 +95,8 @@ namespace Heist
             Console.WriteLine("");
             Console.WriteLine("How many Times would you like to run this bank scenario?");
             int intStr;
+            int Successes = 0;
+            int Failures = 0;
             string AttemptResult = Console.ReadLine();
             bool AttemptResultTryParse = int.TryParse(AttemptResult, out intStr);
             if (AttemptResultTryParse)
@@ -92,14 +105,14 @@ namespace Heist
                 {
                     int luckNumber = new Random().Next(-10, 10);
                     int TeamSkillLevel = 0;
-                    int BankDifficulty = 100;
+                    BankDifficulty = intGood + luckNumber;
                     foreach (KeyValuePair<string, Robber> robber in robbers)
                     {
                         TeamSkillLevel += robber.Value.Skill;
 
 
                     }
-                    BankDifficulty += luckNumber;
+
                     Console.WriteLine($"-----------Heist Members Skill Level: {TeamSkillLevel} ------------");
                     Console.WriteLine();
                     Console.WriteLine($"-----------Bank Difficulty Level: {BankDifficulty} ------------");
@@ -109,17 +122,24 @@ namespace Heist
                     {
                         Console.WriteLine("");
                         Console.WriteLine($"-----------Bank Heist Was Successful ------------");
+                        Successes += 1;
                     }
                     else
                     {
                         Console.WriteLine("");
                         Console.WriteLine("************ Heist Unsuccessful *************");
-
+                        Failures += 1;
                     }
                 }
             }
             Console.WriteLine("");
             Console.WriteLine($"-----------Thanks for playing along.------------");
+            Console.WriteLine("");
+            Console.WriteLine($"-----------Bank Heist Results.------------");
+            Console.WriteLine("");
+            Console.WriteLine($"Successful Attempts {Successes}");
+            Console.WriteLine("");
+            Console.WriteLine($"Failure Attempts {Failures}");
 
 
         }
