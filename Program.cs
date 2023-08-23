@@ -17,6 +17,7 @@ namespace Heist
             Console.WriteLine("What is your teammates name?");
             string Name = Console.ReadLine();
             Dictionary<string, Robber> robbers = new Dictionary<string, Robber>();
+            int BankDifficulty = 100;
 
             while (Name != "")
             {
@@ -80,20 +81,30 @@ namespace Heist
 
             Console.WriteLine($"There are {robbers.Count} members on this heist.");
             Console.WriteLine("");
-            Console.WriteLine("-----------Heist Members------------");
 
+            int TeamSkillLevel = 0;
             foreach (KeyValuePair<string, Robber> robber in robbers)
             {
+                TeamSkillLevel += robber.Value.Skill;
 
-                Console.WriteLine($"Name:  {robber.Value.Name}");
-                Console.WriteLine("");
-                Console.WriteLine($"Skill Level:  {robber.Value.Skill}");
-                Console.WriteLine("");
-                Console.WriteLine($"Courage:  {robber.Value.Courage}");
-                Console.WriteLine("");
-                Console.WriteLine("");
+
             }
+            Console.WriteLine($"-----------Heist Members Skill Level: {TeamSkillLevel} ------------");
+            Console.WriteLine();
+            Console.WriteLine($"-----------Bank Difficulty Level: {BankDifficulty} ------------");
+            if (TeamSkillLevel > BankDifficulty)
+            {
+                Console.WriteLine("");
+                Console.WriteLine($"-----------Bank Heist Was Successful ------------");
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("************ Heist Unsuccessful *************");
 
+            }
+            Console.WriteLine("");
+            Console.WriteLine($"-----------Thanks for playing along.------------");
 
 
         }
