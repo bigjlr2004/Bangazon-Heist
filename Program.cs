@@ -17,8 +17,8 @@ namespace Heist
             Console.WriteLine("What is your teammates name?");
             string Name = Console.ReadLine();
             Dictionary<string, Robber> robbers = new Dictionary<string, Robber>();
-            int BankDifficulty = 100;
-            int luckNumber = new Random().Next(-10, 10);
+
+
 
             while (Name != "")
             {
@@ -82,30 +82,41 @@ namespace Heist
 
             Console.WriteLine($"There are {robbers.Count} members on this heist.");
             Console.WriteLine("");
-
-            int TeamSkillLevel = 0;
-            foreach (KeyValuePair<string, Robber> robber in robbers)
+            Console.WriteLine("How many Times would you like to run this bank scenario?");
+            int intStr;
+            string AttemptResult = Console.ReadLine();
+            bool AttemptResultTryParse = int.TryParse(AttemptResult, out intStr);
+            if (AttemptResultTryParse)
             {
-                TeamSkillLevel += robber.Value.Skill;
+                for (int i = 0; i < intStr; i++)
+                {
+                    int luckNumber = new Random().Next(-10, 10);
+                    int TeamSkillLevel = 0;
+                    int BankDifficulty = 100;
+                    foreach (KeyValuePair<string, Robber> robber in robbers)
+                    {
+                        TeamSkillLevel += robber.Value.Skill;
 
 
-            }
-            BankDifficulty += luckNumber;
-            Console.WriteLine($"-----------Heist Members Skill Level: {TeamSkillLevel} ------------");
-            Console.WriteLine();
-            Console.WriteLine($"-----------Bank Difficulty Level: {BankDifficulty} ------------");
-            Console.WriteLine();
-            Console.WriteLine($"-----------Bank Luck Level: {luckNumber} ------------");
-            if (TeamSkillLevel > BankDifficulty)
-            {
-                Console.WriteLine("");
-                Console.WriteLine($"-----------Bank Heist Was Successful ------------");
-            }
-            else
-            {
-                Console.WriteLine("");
-                Console.WriteLine("************ Heist Unsuccessful *************");
+                    }
+                    BankDifficulty += luckNumber;
+                    Console.WriteLine($"-----------Heist Members Skill Level: {TeamSkillLevel} ------------");
+                    Console.WriteLine();
+                    Console.WriteLine($"-----------Bank Difficulty Level: {BankDifficulty} ------------");
+                    Console.WriteLine();
+                    Console.WriteLine($"-----------Bank Luck Level: {luckNumber} ------------");
+                    if (TeamSkillLevel > BankDifficulty)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine($"-----------Bank Heist Was Successful ------------");
+                    }
+                    else
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("************ Heist Unsuccessful *************");
 
+                    }
+                }
             }
             Console.WriteLine("");
             Console.WriteLine($"-----------Thanks for playing along.------------");
